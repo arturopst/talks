@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -62,6 +62,14 @@ public class TalkRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"id\":1,\"ratings\": null ,\"user\":null,\"name\":\"Test\",\"description\":\"Test Talk\",\"url\":\"www.google.com\"}]"))
                 .andReturn();
+    }
+
+    @Test
+    public void testTalkResourceNotFound() throws  Exception{
+
+        mockMvc.perform(delete("/api/tasks/234")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
 }
