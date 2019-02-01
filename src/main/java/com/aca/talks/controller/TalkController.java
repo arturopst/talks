@@ -6,6 +6,7 @@ import com.aca.talks.service.TalkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -21,33 +22,26 @@ public class TalkController {
     public String getTalks(Model model) {
         List<Talk> talks = talkService.findAll();
         List<TalkDto> talkDto = new ArrayList<>();
-        for (Talk talk : talks) {
+        for (Talk talk : talks){
             TalkDto dto = new TalkDto();
             dto.setId(talk.getId());
             dto.setName(talk.getName());
             dto.setDescription(talk.getDescription());
             dto.setUrl(talk.getUrl());
             dto.setRating(talkService.calculateRating(talk));
-            talkDto.add(dto);
         }
-        model.addAttribute("talks", talkDto);
+        model.addAttribute("talks", talks);
         return "talks";
     }
 
-    @RequestMapping("/talk/details")
-    public String getTalkById(Model model, Long id) {
+    @RequestMapping("/talk/details/{id}")
+    public String getTalkById(Model model, @PathVariable Long id) {
         Talk talk = talkService.findById(id);
-        TalkDto talkDto = new TalkDto();
-        if (talk != null) {
-            talkDto.setId(talk.getId());
-            talkDto.setName(talk.getName());
-            talkDto.setDescription(talk.getDescription());
-            talkDto.setUrl(talk.getUrl());
-            talkDto.setRating(talkService.calculateRating(talk));
-        } else {
-            model.addAttribute("error", "Talk not found");
+        if (talk==null){
+            model.addAttribute("error","Talk not found");
+            model.addAttribute("ratings",talk.getRatings());
         }
-        model.addAttribute("talk", talkDto);
+        model.addAttribute("talk", talk);
         return "details";
     }
 
@@ -57,6 +51,9 @@ public class TalkController {
         model.addAttribute("ratings", talk.getRatings());
         return "ratings";
     }
+
+
+
 
 
 }
