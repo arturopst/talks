@@ -1,0 +1,1 @@
+INSERT INTO Talk(ID, Name, Description, Url) VALUES (1,'JavaScript', 'Mucho JS', 'www.google.com');
