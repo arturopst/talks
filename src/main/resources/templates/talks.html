@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <title>talks</title>
 </head>
+<style>
+    .talk-row div{border: 1px #ccc solid; display: flex; align-items: center;/* justify-content: center;*/}
+    .talk-row div.bottom-col{border-top: 0;}
+</style>
+
 <body>
 
 <div th:replace="layout/header :: header">
@@ -21,18 +26,32 @@
 </div>
 <div class="container">
     <div class="hero-unit">
-        <h1>Talks</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>TITLE</th>
-            </tr>
-            <tr th:each="talk : ${talks}">
-                <td th:text="${talk.id}">Onions</td>
-                <td th:text="${talk.name}">2.41</td>
-                <td th:text="${talk.description}">2.41</td>
-            </tr>
-        </table>
+        <div id="page-title" class="row">
+            <div class="col-xs-12">
+                <h1>1A AUTO Talks</h1>
+            </div>
+        </div>
+        <div id="talks-row">
+            <div class="talk-row-tile row">
+                <div class="right-col col-xs-1"><span>ID</span></div>
+                <div class="left-col col-xs-4"><span>Talk</span></div>
+                <div class="center-col col-xs-5"><span>Description</span></div>
+                <div class="right-col col-xs-2"><span>Rating</span></div>
+            </div>
+
+            <div th:each="talk : ${talks}" class="talk-row row" style="margin-bottom: 10px;">
+                <div th:text="${talk.id}" class="right-col col-xs-1"><span>ID</span></div>
+                <div th:text="${talk.name}" class="left-col col-xs-4"><span>Talk</span></div>
+                <div th:text="${talk.description}" class="center-col col-xs-5"><span>Description</span></div>
+                <div th:text="${talk.user!=null?talk.user:'5'}" class="right-col col-xs-2"><span>Rating</span></div>
+                <div th:text="${talk.url}" class="bottom-col col-xs-12"><span>URL</span></div>
+            </div>
+
+
+        </div>
+
+
+
     </div>
     <div th:replace="layout/footer :: footer">&copy; 2016 The Static Templates</div>
 </div>
