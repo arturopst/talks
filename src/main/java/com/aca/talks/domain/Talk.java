@@ -3,19 +3,24 @@ package com.aca.talks.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 public class Talk {
     @Id
-    //GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String Name;
     private String Description;
     private String Url;
+
+    @OneToMany
+    List<Rating> ratings = new ArrayList<Rating>();
+    @ManyToOne
+    User user ;
 
 }

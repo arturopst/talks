@@ -18,4 +18,11 @@ public class TalkServiceImpl implements TalkService {
     public List<Talk> findAll() {
         return talkRepository.findAll();
     }
+
+    @Override
+    public List<Talk> findByUserId(Long id) {
+        return talkRepository.findAll();
+    }
+
+
 }

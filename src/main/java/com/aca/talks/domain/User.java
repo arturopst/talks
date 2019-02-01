@@ -20,7 +20,7 @@ public class User {
     private List<Talk> talkList = new ArrayList<>();
 
     @OneToMany
-    private List<Ratings> rates = new ArrayList<>();
+    private List<Rating> rates = new ArrayList<>();
 
 
 

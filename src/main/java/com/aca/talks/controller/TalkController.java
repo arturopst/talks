@@ -21,4 +21,5 @@ public class TalkController {
         model.addAttribute("talks", talks);
         return "talks";
     }
+
 }
