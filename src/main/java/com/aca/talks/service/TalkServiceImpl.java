@@ -1,14 +1,15 @@
-package com.aca.talks.com.aca.talks.service;
+package com.aca.talks.service;
 
-import com.aca.talks.com.aca.talks.domain.Talk;
+import com.aca.talks.domain.Talk;
 import com.aca.talks.repository.TalkRepository;
+import com.aca.talks.service.TalkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TalkServiceImpl implements  TalkService{
+public class TalkServiceImpl implements TalkService {
 
     @Autowired
     private TalkRepository talkRepository;

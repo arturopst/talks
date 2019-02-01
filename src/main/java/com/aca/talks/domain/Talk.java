@@ -1,4 +1,4 @@
-package com.aca.talks.com.aca.talks.domain;
+package com.aca.talks.domain;
 
 import lombok.Getter;
 import lombok.Setter;
