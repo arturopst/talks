@@ -16,12 +16,22 @@ public class TalkController {
     private TalkService talkService;
 
     @RequestMapping("/talks")
-    public String getTalks(Model model){
+    public String getTalks(Model model) {
         List<Talk> talks = talkService.findAll();
         model.addAttribute("talks", talks);
         return "talks";
     }
 
-    
+    @RequestMapping("/talk/details")
+    public String getTalkById(Model model, Long id) {
+        Talk talk = talkService.findById(id);
+        if (talk==null){
+            model.addAttribute("error","Talk not found");
+        }
+        model.addAttribute("talk", talk);
+        return "details";
+    }
+
+
 
 }
