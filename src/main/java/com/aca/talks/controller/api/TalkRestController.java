@@ -5,6 +5,8 @@ import com.aca.talks.domain.Talk;
 import com.aca.talks.service.TalkService;
 import javafx.concurrent.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,26 +27,29 @@ public class TalkRestController {
         return talkService.findById(id);
     }
 
-    @RequestMapping(value = "/api/talks/save/", method = RequestMethod.POST)
-    public void saveTalk(@RequestBody Talk talk) {
+    @PostMapping("/api/tasks")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public void save(@RequestBody Talk talk) {
         talkService.save(talk);
     }
 
-    @RequestMapping(value = "/api/talks/delete/{id}", method = RequestMethod.POST)
-    public void deleteTalk(@PathVariable Long id) {
+    @DeleteMapping("/api/tasks/{id}")
+    public ResponseEntity<?> deleteTalk(@PathVariable Long id) {
         Talk talk = talkService.findById(id);
         talkService.delete(talk);
     }
 
-    @RequestMapping(value = "/api/talks/rate/{talkId}/rating", method = RequestMethod.POST)
-    public void rateTalk(@PathVariable Long talkId, @RequestBody Rating rating) {
+    @RequestMapping(value = "/api/talks/{talkId}/rate", method = RequestMethod.POST)
+    public void rateTalk(@PathVariable(value = "talkId") Long talkId, @RequestBody Rating rating) {
         Talk talk = talkService.findById(talkId);
         List<Rating> ratingList = talk.getRatings();
         ratingList.add(rating);
+        talk.setRatings(ratingList);
+        talkService.save(talk);
     }
 
-    @RequestMapping(value = "/api/talks/update/talk", method = RequestMethod.POST)
-    public void rateTalk(@RequestBody Talk talk) {
+    @PutMapping("/api/talks/{id}")
+    public void rateTalk(@PathVariable(value = "id") Long taskId, @RequestBody Talk talk) {
         talkService.save(talk);
     }
 
