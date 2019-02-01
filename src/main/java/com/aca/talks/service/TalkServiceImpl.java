@@ -1,5 +1,6 @@
 package com.aca.talks.service;
 
+import com.aca.talks.domain.Rating;
 import com.aca.talks.domain.Talk;
 import com.aca.talks.repository.TalkRepository;
 import com.aca.talks.service.TalkService;
@@ -28,4 +29,20 @@ public class TalkServiceImpl implements TalkService {
     public Talk findById(Long id) {
         return this.talkRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public Talk save(Talk talk) {
+        return talkRepository.save(talk);
+    }
+
+    @Override
+    public void delete(Talk talk) {
+        talkRepository.delete(talk);
+    }
+
+    @Override
+    public Talk updateTalk(Talk talk) {
+        return null;
+    }
+
 }
