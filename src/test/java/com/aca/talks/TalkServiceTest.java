@@ -32,4 +32,16 @@ public class TalkServiceTest {
         List<Talk> talks = talkService.findAll();
         assertEquals(2, talks.size());
     }
+
+    @Test
+    public void testFindOneTalkName(){
+        Talk talk = new Talk();
+        talk.setId(1L);
+        talk.setName("Unit testing");
+        talk.setDescription("Unit testing review");
+        talk.setUrl("www.codeproject.com");
+
+        when(repository.findById(1L)).thenReturn(java.util.Optional.of(talk));
+        assertEquals("Unit testing",talk.getName());
+    }
 }
