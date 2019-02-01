@@ -42,6 +42,9 @@ public class TalkServiceTest {
         talk.setUrl("www.codeproject.com");
 
         when(repository.findById(1L)).thenReturn(java.util.Optional.of(talk));
+
+        Talk serviceTalk = talkService.findById(1L);
+
         assertEquals("Unit testing",talk.getName());
     }
 }
