@@ -27,13 +27,13 @@ public class TalkRestController {
         return talkService.findById(id);
     }
 
-    @PostMapping("/api/tasks")
+    @PostMapping("/api/talks")
     @ResponseStatus(code = HttpStatus.CREATED)
     public void save(@RequestBody Talk talk) {
         talkService.save(talk);
     }
 
-    @DeleteMapping("/api/tasks/{id}")
+    @DeleteMapping("/api/talks/{id}")
     public ResponseEntity<?> deleteTalk(@PathVariable Long id) {
         Talk talk = talkService.findById(id);
         if (talk == null) {
@@ -55,7 +55,12 @@ public class TalkRestController {
 
     @PutMapping("/api/talks/{id}")
     public void rateTalk(@PathVariable(value = "id") Long taskId, @RequestBody Talk talk) {
-        talkService.save(talk);
+        Talk dbTalk = talkService.findById(taskId);
+        if (dbTalk == null) {
+            throw new ResourceNotFoundException("Task", "id", taskId);
+        }
+        dbTalk.setName(talk.getName());
+        talkService.save(dbTalk);
     }
 
 
