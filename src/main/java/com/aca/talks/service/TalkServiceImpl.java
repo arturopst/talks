@@ -24,5 +24,8 @@ public class TalkServiceImpl implements TalkService {
         return talkRepository.findAll();
     }
 
-
+    @Override
+    public Talk findById(Long id) {
+        return this.talkRepository.findById(id).orElse(null);
+    }
 }
