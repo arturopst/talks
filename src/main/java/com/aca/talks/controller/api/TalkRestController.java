@@ -37,6 +37,7 @@ public class TalkRestController {
     public ResponseEntity<?> deleteTalk(@PathVariable Long id) {
         Talk talk = talkService.findById(id);
         talkService.delete(talk);
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/api/talks/{talkId}/rate", method = RequestMethod.POST)
