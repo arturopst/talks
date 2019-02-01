@@ -22,7 +22,7 @@ public class TalkRepositoryTest {
     @Test
     public void testFindAll() {
         List<Talk> books = repository.findAll();
-        assertEquals(1, books.size());
+        assertEquals(3, books.size());
     }
 
 }

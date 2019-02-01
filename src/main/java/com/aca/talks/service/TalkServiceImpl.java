@@ -45,4 +45,20 @@ public class TalkServiceImpl implements TalkService {
         return null;
     }
 
+    @Override
+    public Long calculateRating(Talk talk) {
+        List<Rating> ratings = talk.getRatings();
+        Long sum = 0L;
+        Long res =0L;
+        for (Rating rating : ratings){
+            sum= sum+rating.getRating();
+        }
+        if (sum>0){
+            res= sum/ratings.size();
+        }
+        return res;
+
+    }
+
+
 }

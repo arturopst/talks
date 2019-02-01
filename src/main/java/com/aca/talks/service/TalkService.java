@@ -12,4 +12,5 @@ public interface TalkService {
     public Talk save(Talk talk);
     public void delete(Talk talk);
     public Talk updateTalk(Talk talk);
+    public Long calculateRating(Talk talk);
 }
