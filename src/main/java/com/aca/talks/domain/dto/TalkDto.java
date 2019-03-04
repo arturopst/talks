@@ -1,4 +1,4 @@
-package com.aca.talks.controller.Dto;
+package com.aca.talks.domain;
 
 
 import lombok.Getter;

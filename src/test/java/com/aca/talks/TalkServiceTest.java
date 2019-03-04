@@ -34,17 +34,14 @@ public class TalkServiceTest {
     }
 
     @Test
-    public void testFindOneTalkName(){
+    public void testFindById(){
         Talk talk = new Talk();
         talk.setId(1L);
         talk.setName("Unit testing");
         talk.setDescription("Unit testing review");
         talk.setUrl("www.codeproject.com");
-
-        when(repository.findById(1L)).thenReturn(java.util.Optional.of(talk));
-
+       when(repository.findById(1L)).thenReturn(java.util.Optional.of(talk));
         Talk serviceTalk = talkService.findById(1L);
-
-        assertEquals("Unit testing",talk.getName());
+        assertEquals(talk.getName(),serviceTalk.getName());
     }
 }

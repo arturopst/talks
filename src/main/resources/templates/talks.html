@@ -46,7 +46,7 @@
                 <div th:text="${talk.id}" class="right-col col-xs-1"><span>ID</span></div>
                 <div th:text="${talk.name}" class="left-col col-xs-4"><span>Talk</span></div>
                 <div th:text="${talk.description}" class="center-col col-xs-5"><span>Description</span></div>
-                <div th:text="${talk.user!=null?talk.user:'5'}" class="right-col col-xs-2"><span>Rating</span></div>
+                <div th:text="${talk.rating}" class="right-col col-xs-2"><span>Rating</span></div>
                 <div th:if="${talk.url}" class="bottom-col col-xs-12">
                     <a th:href="${talk.url}" style="display: block; width: 100%;">
                         <span>See presentation</span>

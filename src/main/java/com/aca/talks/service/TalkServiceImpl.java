@@ -36,11 +36,6 @@ public class TalkServiceImpl implements TalkService {
     }
 
     @Override
-    public Talk updateTalk(Talk talk) {
-        return null;
-    }
-
-    @Override
     public Long calculateRating(Talk talk) {
         List<Rating> ratings = talk.getRatings();
         Long sum = 0L;

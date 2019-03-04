@@ -12,7 +12,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long Rating;
+    private Long rating;
 
     @ManyToOne
     User user;

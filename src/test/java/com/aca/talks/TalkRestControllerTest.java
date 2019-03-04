@@ -2,7 +2,10 @@ package com.aca.talks;
 
 import com.aca.talks.controller.api.TalkRestController;
 import com.aca.talks.domain.Talk;
+import com.aca.talks.exception.ResourceNotFoundException;
 import com.aca.talks.service.TalkService;
+import com.aca.talks.service.TalkServiceImpl;
+import com.aca.talks.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,6 +34,8 @@ public class TalkRestControllerTest {
     @MockBean
     private TalkService talkService;
 
+    @MockBean
+    private UserService userService;
 
     @Test
     public void controllerReturnsOK() throws  Exception{
@@ -65,11 +71,19 @@ public class TalkRestControllerTest {
     }
 
     @Test
-    public void testTalkResourceNotFound() throws  Exception{
+    public void testTalkResourceNotFoundReturnCode() throws  Exception{
 
         mockMvc.perform(delete("/api/tasks/234")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    (expected = ResourceNotFoundException.class)
+    public void testNotFoundExceptionClassLevel(){
+        TalkService myTalkService = mock(TalkServiceImpl.class);
+        TalkRestController restController = new TalkRestController(myTalkService);
+        restController.deleteTalk(123L);
     }
 
 }

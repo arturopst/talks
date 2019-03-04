@@ -22,6 +22,4 @@ public class User {
     @OneToMany
     private List<Rating> rates = new ArrayList<>();
 
-
-
 }
